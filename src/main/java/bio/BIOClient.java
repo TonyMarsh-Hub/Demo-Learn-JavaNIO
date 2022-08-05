@@ -13,6 +13,7 @@ public class BIOClient {
             OutputStream outputStream = client.getOutputStream();
             outputStream.write(msg.getBytes());
             outputStream.close();
+            System.in.read();//让客户端与服务器保持连接
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
