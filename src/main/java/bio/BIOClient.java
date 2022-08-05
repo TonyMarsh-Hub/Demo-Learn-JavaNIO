@@ -11,7 +11,7 @@ public class BIOClient {
             Socket client = new Socket("localhost", 10086);
             String msg = "hi,buddy";
             OutputStream outputStream = client.getOutputStream();
-            outputStream.write(msg.getBytes());
+            outputStream.write(msg.getBytes(), 0, msg.length());
             outputStream.close();
             System.in.read();//让客户端与服务器保持连接
         } catch (IOException e) {
