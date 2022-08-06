@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+/**
+ * 这是一个错误的示例，目标文件中的数据将只有null而没有内容
+ * 正确的示例与原因解析在Demo1Fixed.java中
+ */
 public class Demo1 {
     public static void main(String[] args) throws IOException {
         String msg = "hi,dude";
