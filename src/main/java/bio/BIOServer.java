@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class BIOServer {
     public static void main(String[] args) {
+        ExecutorService executorService = Executors.newCachedThreadPool();
         try {
             ServerSocket serverSocket = new ServerSocket(10086);
             System.out.println("服务器启动成功！");
@@ -15,7 +18,7 @@ public class BIOServer {
                 Socket client = serverSocket.accept();
                 System.out.println("接收到一个连接！");
                 //为每一个客户端创建一个线程用于通信
-                new Thread(() -> {
+                executorService.execute(() -> {
                     System.out.println("线程id:" + Thread.currentThread().getId());
                     System.out.println("线程名称:" + Thread.currentThread().getName());
                     try {
@@ -30,7 +33,7 @@ public class BIOServer {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }).start();
+                });
             }
         } catch (IOException e) {
             e.printStackTrace();
