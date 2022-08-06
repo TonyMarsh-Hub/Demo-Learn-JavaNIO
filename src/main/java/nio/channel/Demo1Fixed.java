@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+/**
+ * 通过javaNIO.channel写入数据到本地文件中
+ */
 public class Demo1Fixed {
     public static void main(String[] args) throws IOException {
         String msg = "hi,dude";
