@@ -16,7 +16,10 @@ public class Demo3 {
         File file = new File("channel01.txt");
         File fileCopy = new File("channel01Copy.txt");
 
-        //复制分为两步： 1.读取原数据到内存 2.从内存写入目标文件 所以需要两个io流的通道都要
+        //复制分为两步：
+        // 1.读取原数据到内存    (inputStream -> channel -> buffer)
+        // 2.从内存写入目标文件  (buffer -> channel -> outputStream)
+        // 所以需要两个io流的通道都要
 
         //创建输入和输出流
         FileInputStream fileInputStream = new FileInputStream(file);
