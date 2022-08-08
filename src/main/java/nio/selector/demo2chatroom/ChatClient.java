@@ -50,7 +50,14 @@ public class ChatClient {
                         SocketChannel socketChannel = (SocketChannel) key.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         socketChannel.read(buffer);
-                        String msg = new String(buffer.array());
+
+                        //Bug fixed: 避免使用使用 new String(buffer.array() 来获取数据，因为可能会包含空数据。例如数据就1个字节，但是Buffer的size有1024字节，所以会包含1023个空数据。
+                        //解决方式：根据在读模式下，Buffer的limit属性就是整个数据的长度的特性,先获取Buffer的limit属性，创建一个大小和limit相等的数组，然后将buffer的数据拷贝到新数组
+                        buffer.flip();
+                        byte[] data = new byte[buffer.limit()];
+                        buffer.get(data);
+                        String msg = new String(data);
+
                         System.out.println(msg);
                     }
                     iterator.remove();
